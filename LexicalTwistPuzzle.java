@@ -14,16 +14,24 @@ public class LexicalTwistPuzzle {
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        // Validate first word
+        // UC3 Validation
         if (firstWord.contains(" ")) {
             System.out.println(firstWord + " is an invalid word");
             return;
         }
 
-        // Validate second word
         if (secondWord.contains(" ")) {
             System.out.println(secondWord + " is an invalid word");
             return;
+        }
+
+        // UC4 Reverse Check
+        String reversed = new StringBuilder(firstWord).reverse().toString();
+
+        if (reversed.equalsIgnoreCase(secondWord)) {
+            System.out.println("The second word is the reverse of the first word.");
+        } else {
+            System.out.println("The words are not reverse of each other.");
         }
 
         scanner.close();
