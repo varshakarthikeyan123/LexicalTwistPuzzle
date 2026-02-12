@@ -14,7 +14,7 @@ public class LexicalTwistPuzzle {
         System.out.print("Enter second word: ");
         String secondWord = scanner.nextLine();
 
-        // UC3 Validation
+        // UC3: Validate single word constraint
         if (firstWord.contains(" ")) {
             System.out.println(firstWord + " is an invalid word");
             return;
@@ -25,20 +25,21 @@ public class LexicalTwistPuzzle {
             return;
         }
 
-        // UC4 Reverse Check
+        // UC4: Reverse check
         String reversed = new StringBuilder(firstWord).reverse().toString();
 
         if (reversed.equalsIgnoreCase(secondWord)) {
 
-            // UC5 Transformation
-            String transformed = reversed.toLowerCase()
+            // UC5: Transform if reverse match
+            String transformed = reversed
+                    .toLowerCase()
                     .replaceAll("[aeiou]", "@");
 
             System.out.println(transformed);
 
         } else {
 
-            // UC6 Combine & Count
+            // UC6: Combine and count
             String combined = (firstWord + secondWord).toUpperCase();
 
             int vowelCount = 0;
@@ -53,8 +54,46 @@ public class LexicalTwistPuzzle {
                 }
             }
 
-            System.out.println("Vowels: " + vowelCount);
-            System.out.println("Consonants: " + consonantCount);
+            // UC7: Rule-based output
+
+            if (vowelCount > consonantCount) {
+
+                int printed = 0;
+                String printedChars = "";
+
+                for (char ch : combined.toCharArray()) {
+                    if ("AEIOU".indexOf(ch) != -1 &&
+                            printedChars.indexOf(ch) == -1) {
+
+                        System.out.print(ch);
+                        printedChars += ch;
+                        printed++;
+
+                        if (printed == 2) break;
+                    }
+                }
+
+            } else if (consonantCount > vowelCount) {
+
+                int printed = 0;
+                String printedChars = "";
+
+                for (char ch : combined.toCharArray()) {
+                    if (Character.isLetter(ch) &&
+                            "AEIOU".indexOf(ch) == -1 &&
+                            printedChars.indexOf(ch) == -1) {
+
+                        System.out.print(ch);
+                        printedChars += ch;
+                        printed++;
+
+                        if (printed == 2) break;
+                    }
+                }
+
+            } else {
+                System.out.println("Vowels and consonants are equal");
+            }
         }
 
         scanner.close();
