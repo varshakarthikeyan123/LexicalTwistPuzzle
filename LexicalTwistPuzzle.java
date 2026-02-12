@@ -36,49 +36,25 @@ public class LexicalTwistPuzzle {
 
             System.out.println(transformed);
 
-        }
+        } else {
 
-        scanner.close();
-    }
-}
-import java.util.Scanner;
+            // UC6 Combine & Count
+            String combined = (firstWord + secondWord).toUpperCase();
 
-public class LexicalTwistPuzzle {
+            int vowelCount = 0;
+            int consonantCount = 0;
 
-    public static void main(String[] args) {
+            for (char ch : combined.toCharArray()) {
 
-        System.out.println("Lexical Twist Puzzle");
+                if ("AEIOU".indexOf(ch) != -1) {
+                    vowelCount++;
+                } else if (Character.isLetter(ch)) {
+                    consonantCount++;
+                }
+            }
 
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter first word: ");
-        String firstWord = scanner.nextLine();
-
-        System.out.print("Enter second word: ");
-        String secondWord = scanner.nextLine();
-
-        // UC3 Validation
-        if (firstWord.contains(" ")) {
-            System.out.println(firstWord + " is an invalid word");
-            return;
-        }
-
-        if (secondWord.contains(" ")) {
-            System.out.println(secondWord + " is an invalid word");
-            return;
-        }
-
-        // UC4 Reverse Check
-        String reversed = new StringBuilder(firstWord).reverse().toString();
-
-        if (reversed.equalsIgnoreCase(secondWord)) {
-
-            // UC5 Transformation
-            String transformed = reversed.toLowerCase()
-                    .replaceAll("[aeiou]", "@");
-
-            System.out.println(transformed);
-
+            System.out.println("Vowels: " + vowelCount);
+            System.out.println("Consonants: " + consonantCount);
         }
 
         scanner.close();
